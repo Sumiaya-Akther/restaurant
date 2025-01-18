@@ -8,7 +8,7 @@ import slide4 from "../../assets/home/slide4.jpg";
 import slide5 from "../../assets/home/slide5.jpg";
 const Category = () => {
   return (
-    <Swiper
+    <Swiper className="max-w-7xl mx-auto"
     spaceBetween={50}
     slidesPerView={4}
     onSlideChange={() => console.log('slide change')}

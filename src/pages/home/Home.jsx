@@ -1,6 +1,7 @@
 import SectionHeading from "../../Components/SectionHeading";
 import Banner from "./Banner";
 import Category from "./Category";
+import Contact from "./Contact";
 import Menu from "./Menu";
 import SevenStar from "./SevenStar";
 
@@ -17,6 +18,7 @@ const Home = () => {
       heading="FROM OUR MENU">
       </SectionHeading>
       <Menu></Menu>
+      <Contact></Contact>
     </div>
   );
 };
