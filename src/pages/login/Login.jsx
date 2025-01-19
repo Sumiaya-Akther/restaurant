@@ -4,7 +4,9 @@ import img from "../../assets/others/authentication2.png"
 import { CiFacebook } from "react-icons/ci";
 import { FaGoogle } from "react-icons/fa";
 import { VscGithub } from "react-icons/vsc";
+import logo from "../../assets/logo.png";
 import "./Login.css"
+
 const Login = () => {
   const {
     register,
@@ -15,7 +17,11 @@ const Login = () => {
 
   const onSubmit = (data) => console.log(data)
   return (
-    <div className="flex justify-center gap-40 bg-img">
+   <div className="bg-img">
+    <Link to="/">
+     <img className="w-16 ml-24" src={logo} alt="navlogo" />
+    </Link>
+     <div className="flex justify-center items-center h-screen gap-40">
       <div>
           <img src={img} alt="" />
     </div>
@@ -45,6 +51,7 @@ const Login = () => {
     </div>
     </div>
     
+   </div>
   );
 };
 

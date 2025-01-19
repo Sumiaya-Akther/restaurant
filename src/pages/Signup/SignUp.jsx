@@ -5,6 +5,7 @@ import img from "../../assets/others/authentication2.png"
 import { CiFacebook } from "react-icons/ci";
 import { FaGoogle } from "react-icons/fa";
 import { VscGithub } from "react-icons/vsc";
+import logo from "../../assets/logo.png"
 import "../login/Login"
 const SignUp = () => {
   const {
@@ -16,7 +17,11 @@ const SignUp = () => {
 
   const onSubmit = (data) => console.log(data)
   return (
-    <div className="flex justify-center  gap-40 flex-row-reverse bg-img">
+   <div className="bg-img">
+    <Link to="/">
+         <img className="w-16 ml-24" src={logo} alt="navlogo" />
+        </Link>
+     <div className="flex justify-center items-center h-screen  gap-40 flex-row-reverse">
       <div>
           <img src={img} alt="" />
     </div>
@@ -37,9 +42,22 @@ const SignUp = () => {
     </div>
     <div>
       <label htmlFor="" className="text-xl">Password</label> <br />
-      <input className="focus:outline-none px-2 py-2 w-96" placeholder="password" {...register("password", { required: true, minLength: 6, maxLength: 20 })} />
+      <input className="focus:outline-none px-2 py-2 w-96" placeholder="password" {...register("password", { required: true,
+         minLength: {
+          value: 6,
+          message: "Your password must be six character"
+         },
+          maxLength: {
+            value: 20,
+            message: "your password must be 20 character long"
+          },
+          pattern: {
+            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+            message: "it must contain at least one upercase" 
+          } 
+          })} />
       {
-        errors.password && <p>Password min lenth 6 character and max lenth 20 </p>
+        errors.password && <p className="text-rose-400">{errors.password.message} </p>
       }
     </div>
     <input className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" value="SignUp" />
@@ -55,6 +73,7 @@ const SignUp = () => {
   </div>
     </div>
     </div>
+   </div>
     
   );
 };
