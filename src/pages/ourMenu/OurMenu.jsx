@@ -1,37 +1,52 @@
-import SectionEnding from "../../Components/SectionEnding";
+
 import SectionHeading from "../../Components/SectionHeading";
-import Banner from "./Banner";
-import Dessert from "./Dessert";
-import DessertMenu from "./DessertMenu";
-import Offer from "./Offer";
-import Pizza from "./Pizza";
-import PizzaMenu from "./PizzaMenu";
-import Salad from "./Salad";
-import SaladMenu from "./SaladMenu";
-import Soup from "./Soup";
-import SoupMenu from "./SoupMenu";
+import useMenu from "../../hooks/useMenu";
+import CoverPage from "./CoverPage";
+import MenuCategory from "./MenuCategory";
+import bannerImg from "../../assets/home/chef-service.jpg";
+import coverImg from "../../assets/menu/banner3.jpg";
+import PrimaryButton from "../../Components/PrimaryButton";
 
 const OurMenu = () => {
+  const [menu] = useMenu()
+  const popular = menu.filter(item=> item.category === "popular");
+  const dessert = menu.filter(item=> item.category === "dessert");
+  const pizza = menu.filter(item=> item.category === "pizza");
+  const salad = menu.filter(item=> item.category === "salad");
+  const soup = menu.filter(item=> item.category === "soup");
+  console.log(popular, dessert, pizza, salad, soup )
   return (
     <div>
-      <Banner></Banner>
+      <CoverPage
+        title="Our Menu"
+        bannerImg={coverImg}>
+      </CoverPage>
       <SectionHeading title="Don't miss"
       heading="TODAY'S OFFER">
       </SectionHeading>
-      <Offer></Offer>
-      <SectionEnding title="ORDER YOUR FAVOURITE FOOD"></SectionEnding>
-      <Dessert></Dessert>
-      <DessertMenu></DessertMenu>
-      <SectionEnding title="ORDER YOUR FAVOURITE FOOD"></SectionEnding>
-      <Pizza></Pizza>
-      <PizzaMenu></PizzaMenu>
-      <SectionEnding title="ORDER YOUR FAVOURITE FOOD"></SectionEnding>
-      <Salad></Salad>
-      <SaladMenu></SaladMenu>
-      <SectionEnding title="ORDER YOUR FAVOURITE FOOD"></SectionEnding>
-      <Soup></Soup>
-      <SoupMenu></SoupMenu>
-      <SectionEnding title="ORDER YOUR FAVOURITE FOOD"></SectionEnding>
+      <MenuCategory
+      item={popular}>
+      </MenuCategory>
+      <MenuCategory
+      title="Dessert"
+      bannerImg={bannerImg}
+      item={dessert}>
+      </MenuCategory>
+      <MenuCategory
+      title="Pizza"
+      bannerImg={bannerImg}
+      item={pizza}>
+      </MenuCategory>
+      <MenuCategory
+      title="Salad"
+      bannerImg={bannerImg}
+      item={salad}>
+      </MenuCategory>
+      <MenuCategory
+      title="Soups"
+      bannerImg={bannerImg}
+      item={soup}>
+      </MenuCategory>
     </div>
   );
 };

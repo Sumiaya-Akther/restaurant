@@ -1,18 +1,13 @@
-import { useState } from "react";
+
+import useMenu from "../../hooks/useMenu";
 import MenuItem from "../shared/MenuItem";
 
 const Menu = () => {
-  const [menu, setMenu] = useState([])
-  fetch("menu.json")
-  .then(res=>res.json())
-  .then(data=>{
-    const dessert = data.filter(item=> item.category === "dessert");
-    setMenu(dessert)
-    console.log(dessert)
-  })
+  const [menu] =  useMenu()
+  const dessert = menu.filter(item=> item.category === "dessert");
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto">
-   {menu.map(item=>
+   {dessert.map(item=>
     <MenuItem
     key={item._id}
     item={item}
