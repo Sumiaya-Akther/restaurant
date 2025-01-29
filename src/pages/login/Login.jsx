@@ -5,9 +5,13 @@ import { CiFacebook } from "react-icons/ci";
 import { FaGoogle } from "react-icons/fa";
 import { VscGithub } from "react-icons/vsc";
 import logo from "../../assets/logo.png";
-import "./Login.css"
+import "./Login.css";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useEffect,useState } from "react";
 
 const Login = () => {
+  // const [disable, setDisable]
+  const [value, setValue] = useState("");
   const {
     register,
     handleSubmit,
@@ -15,7 +19,19 @@ const Login = () => {
     formState: { errors },
   } = useForm()
 
+  useEffect (()=>{
+    loadCaptchaEnginge(6); 
+
+  },[])
+
   const onSubmit = (data) => console.log(data)
+  const handleCaptcha = (event) =>{
+    const value = event.target.value;
+
+    console.log(value)
+    setValue(value)
+  } 
+
   return (
    <div className="bg-img">
     <Link to="/">
@@ -36,6 +52,14 @@ const Login = () => {
     <div>
       <label htmlFor="" className="text-xl">Password</label> <br />
       <input className="focus:outline-none px-2 py-2 w-96" placeholder="password" {...register("password")} />
+    </div>
+
+
+    <div>
+      <label htmlFor="" className="text-xl">Password
+      <LoadCanvasTemplate />
+        </label> <br />
+      <input type="text" onChange = {handleCaptcha} className="focus:outline-none px-2 py-2 w-96" placeholder="write above captcha" />
     </div>
     <input className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" value="SignIn" />
   </form>
