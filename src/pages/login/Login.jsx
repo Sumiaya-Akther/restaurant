@@ -5,12 +5,13 @@ import { CiFacebook } from "react-icons/ci";
 import { FaGoogle } from "react-icons/fa";
 import { VscGithub } from "react-icons/vsc";
 import logo from "../../assets/logo.png";
+import toast, { Toaster } from 'react-hot-toast';
 import "./Login.css";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect,useState } from "react";
 
 const Login = () => {
-  // const [disable, setDisable]
+  const [disabled, setDisabled] = useState(true)
   const [value, setValue] = useState("");
   const {
     register,
@@ -25,15 +26,23 @@ const Login = () => {
   },[])
 
   const onSubmit = (data) => console.log(data)
-  const handleCaptcha = (event) =>{
-    const value = event.target.value;
+  const handleValidateCaptcha = (event) =>{
+    const user_captcha_value = event.target.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+  }
 
-    console.log(value)
-    setValue(value)
+  else {
+      setDisabled(true);
+      toast('Captcha does not match')
+  }
+    console.log(user_captcha_value)
   } 
 
   return (
    <div className="bg-img">
+          <Toaster />
+
     <Link to="/">
      <img className="w-16 ml-24" src={logo} alt="navlogo" />
     </Link>
@@ -56,12 +65,12 @@ const Login = () => {
 
 
     <div>
-      <label htmlFor="" className="text-xl">Password
+      <label htmlFor="" className="text-xl">Captcha
       <LoadCanvasTemplate />
         </label> <br />
-      <input type="text" onChange = {handleCaptcha} className="focus:outline-none px-2 py-2 w-96" placeholder="write above captcha" />
+      <input type="text" onBlur = {handleValidateCaptcha} className="focus:outline-none px-2 py-2 w-96" placeholder="write above captcha" />
     </div>
-    <input className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" value="SignIn" />
+    <input disabled={disabled} className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" value="SignIn" />
   </form>
   <p>New here? <Link className="text-orange-400" to="/signup">Crate a New Account</Link></p>
   <p className="text-center mt-5 text-xl">Or sign in with</p>

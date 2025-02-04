@@ -1,5 +1,5 @@
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 
 const ToDo = () => {
@@ -8,21 +8,15 @@ const ToDo = () => {
         register,
         handleSubmit,
         watch,
-        formState: { errors }, 
       } = useForm()
-     console.log(errors)
       const onSubmit = (data) =>{
         console.log(data)
         const user ={
           title: data.title,
-          work: data.work,
-          id: data.id
-
+          work: data.work
         }
         const stroage = localStorage.setItem("user", JSON.stringify(user))
         console.log(stroage)
-
-        
       } 
 
     
@@ -33,44 +27,58 @@ const ToDo = () => {
      
         
   return (
-   <div>
-     <form onSubmit={handleSubmit(onSubmit)}>
+   <div className="ml-96">
+    <h1 className="text-center font-bold text-xl mt-10 mb-10">To-Do List</h1>
+    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
     {/* register your input into the hook by invoking the "register" function */}
     <div>
       <label htmlFor="" className="text-xl">Title</label> <br />
-      <input className="mb-5 focus:outline-none px-2 py-2 w-96" placeholder="title" {...register("title", { required: true, minLength: 1, maxLength: 20 })} />
-      {
-        errors.name && <p className="text-rose-400">Name min lenth 1 character and  max lenth 20 character</p>
-      }
+      <input className="mb-5 focus:outline-none px-2 py-2 w-96" placeholder="title" type="text" {...register("title", { required: true })} />
     </div>
     <div>
       <label htmlFor="" className="text-xl">Work</label> <br />
-      <input className="mb-5 focus:outline-none px-2 py-2 w-96" placeholder="work" {...register("work")} />
+      <input className="mb-5 focus:outline-none px-2 py-2 w-96" placeholder="work" type="text" {...register("work", { required: true })} />
     </div>
-    <div>
-      <label htmlFor="" className="text-xl">ID</label> <br />
-      <input className="focus:outline-none px-2 py-2 w-96" placeholder="id" {...register("id", { required: true,
-         minLength: {
-          value: 6,
-          message: "Your password must be six character"
-         },
-          maxLength: {
-            value: 20,
-            message: "your password must be 20 character long"
-          },
-          pattern: {
-            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-            message: "it must contain at least one upercase" 
-          } 
-          })} />
-      {
-        errors.password && <p className="text-rose-400">{errors.password.message} </p>
-      }
-    </div>
-    <input className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" value="SignUp" />
+    <input className="btn mt-5 bg-orange-400 text-white w-96 hover:bg-orange-400" type="submit" />
   </form>
-  <h1>User Id: {userData.id} </h1>
-  <p>User work: {userData.work} </p>
+    </div>
+    
+  {/* <div>
+     <p className="font-semibold">Title: {userData.title}</p>
+     <p className="text-sm text-gray-500">Work: {userData.work}</p>
+   </div> */}
+   <div class="overflow-x-auto">
+  <table class="table">
+    {/* <thead>
+      <tr>
+        <th></th>
+        <th>TITLE</th>
+        <th>Work</th>
+      </tr>
+    </thead> */}
+    <tbody>
+      <tr>
+        <th>1</th>
+        <td>Title</td>
+        <td>{userData.title}</td>
+        <td>Blue</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>Hart Hagerty</td>
+        <td>Desktop Support Technician</td>
+        <td>Purple</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>Brice Swyre</td>
+        <td>Tax Accountant</td>
+        <td>Red</td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
    </div>
    
   

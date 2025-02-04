@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Category from "./Category";
 import Contact from "./Contact";
 import Menu from "./Menu";
+import Reviews from "./Reviews";
 import SevenStar from "./SevenStar";
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
       </SectionHeading>
       <Menu></Menu>
       <Contact></Contact>
+      <Reviews></Reviews>
     </div>
   );
 };
