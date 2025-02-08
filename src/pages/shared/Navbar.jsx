@@ -1,21 +1,40 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 
 
 const Navbar = () => {
+  const {user, logOut} = useContext(AuthContext)
+  console.log(user)
+  const handleLogOut = () =>{
+   logOut()
+  }
     const navLink = 
     <div className="flex md:flex-row flex-col gap-5 uppercase text-black md:text-white">  
       <Link to="/">Home</Link>
       <Link to="/contact">Contact Us</Link>
       <Link to="/ourMenu">Our Menu</Link>
       <Link to="/ourShop">Our Shop</Link>
+      {
+        user?
+        <Link to="/dashboard">Dashboard</Link>
+        :
+        <></>
+      }
       <Link to="/dashboard/cart">
           <FaShoppingCart className="text-2xl"></FaShoppingCart>      
           <div className="badge badge-secondary absolute top-0 mt-2 ml-3">+0</div>
       </Link>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/login">Login</Link>
+      
+      {
+        user ?
+        <button onClick={handleLogOut} className="pb-1">LOGOUT</button>
+        :
+        <Link to="/login">Login</Link>
+      }
+      
       
     </div>
   return (

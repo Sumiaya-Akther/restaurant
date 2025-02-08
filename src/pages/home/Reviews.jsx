@@ -9,11 +9,11 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
     useEffect(()=>{ 
-        fetch('http://localhost:5000/review')
+        fetch('reviews.json')
         .then(res=>res.json())    
         .then(data=> {
             setReviews(data)
-            console.log(data)
+            // console.log(data)
         })
     },[]); 
   return (
